@@ -53,6 +53,7 @@ function parseRoute(pathname: string): Route {
 
 function navigate(path: string) {
   window.history.pushState({}, "", path);
+  window.scrollTo({ top: 0, behavior: "smooth" });
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
@@ -92,6 +93,9 @@ function ProfileEditor({
   const [metadata, setMetadata] = useState(profile?.metadataUri || "");
   const [busy, setBusy] = useState(false);
   useEffect(() => { setUsername(profile?.username || ""); setMetadata(profile?.metadataUri || ""); }, [profile]);
+  const usernameBytes = new TextEncoder().encode(username).length;
+  const metadataBytes = new TextEncoder().encode(metadata).length;
+  const tooLong = usernameBytes > 32 || metadataBytes > 100;
   async function submit(event: FormEvent) {
     event.preventDefault();
     setBusy(true);
@@ -100,9 +104,10 @@ function ProfileEditor({
   return (
     <form className="profile-form" onSubmit={submit}>
       <div className="section-heading"><div><span className="eyebrow">{profile ? "Edit your character sheet" : "Start with a character sheet"}</span><h2>{profile ? "Keep the chain updated." : "Claim your on-chain corner."}</h2></div></div>
-      <label>Username <span>1–32 UTF-8 bytes</span><input maxLength={32} required value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Something memorable" /></label>
-      <label>Metadata URI <span>0–100 bytes · plain text, optional link</span><input maxLength={100} value={metadata} onChange={(event) => setMetadata(event.target.value)} placeholder="https://… (optional)" /></label>
-      <div className="form-foot"><p className="fine-print">Names are not unique. Your short wallet address stays beside it.</p><button className="button button--primary" disabled={disabled || busy}>{busy ? "Waiting…" : profile ? "Save profile" : "Create profile"}</button></div>
+      <label>Username <span>1–32 UTF-8 bytes · {usernameBytes}/32</span><input maxLength={32} required value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Something memorable" /></label>
+      <label>Metadata URI <span>0–100 bytes · plain text, optional link · {metadataBytes}/100</span><input maxLength={100} value={metadata} onChange={(event) => setMetadata(event.target.value)} placeholder="https://… (optional)" /></label>
+      {tooLong && <p className="error-text">That is too many UTF-8 bytes for the on-chain account.</p>}
+      <div className="form-foot"><p className="fine-print">Names are not unique. Your short wallet address stays beside it.</p><button className="button button--primary" disabled={disabled || busy || tooLong}>{busy ? "Waiting…" : profile ? "Save profile" : "Create profile"}</button></div>
     </form>
   );
 }
