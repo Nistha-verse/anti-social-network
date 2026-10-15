@@ -137,7 +137,7 @@ These values came from `solana program show D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTN
 - Public RPC and `getProgramAccounts` do not scale to a production social network. A production version needs an indexer and dedicated RPC infrastructure; this demo intentionally has neither.
 - Devnet can reset, public endpoints rate-limit, and devnet SOL has no market value.
 - The pool has no withdrawal instruction. Its exact RPC balance is shown beside a decorative, bounded jar.
-- The current repository has no public static hosting URL yet; hosting is a remaining handoff step, not an invented link.
+- The live static app is hosted at [app-nu-rose-23.vercel.app](https://app-nu-rose-23.vercel.app/). It is a Vercel production deployment of `app/` with an SPA rewrite for `/w/<pubkey>`, `/me`, and `/pool`.
 
 ## Seven-step demo script
 
@@ -151,15 +151,15 @@ These values came from `solana program show D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTN
 
 ## Verify it yourself
 
-The static app URL is **TODO — not hosted yet**. The program and real on-chain references are available now:
+The live app is [app-nu-rose-23.vercel.app](https://app-nu-rose-23.vercel.app/). The program and real on-chain references are available now:
 
 - Program: [Explorer](https://explorer.solana.com/address/D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTNJSRAKH9m?cluster=devnet)
 - Spite Pool PDA: [`4xWJHhdd5pVzEVhJfy1ZT7Ek81xrGPmomjX3xCeMpzbW`](https://explorer.solana.com/address/4xWJHhdd5pVzEVhJfy1ZT7Ek81xrGPmomjX3xCeMpzbW?cluster=devnet)
 - A real measured Boo transaction: [Explorer transaction](https://explorer.solana.com/tx/2pLz9QfoHbeqEcQh1QmGVtJpiKHpxvLBj4pPNPFQQBy38QVstPrE9aAcXF8LZQG3LeE7UJVhDHt9zrGHiijbzTV5?cluster=devnet)
 - A real measured Judgment account from that transaction: [`FtEUddCNbakXPDuxowjfngr772t6RTnZXw8UMGXHXFMq`](https://explorer.solana.com/address/FtEUddCNbakXPDuxowjfngr772t6RTnZXw8UMGXHXFMq?cluster=devnet)
 
-To verify: install a real wallet, switch it to devnet, request SOL from the official faucet, connect, create a profile, Boo a wallet, then open the receipt's Explorer link and confirm the Judgment account and transaction directly on-chain.
+To verify: install a real wallet, switch it to devnet, request SOL from the official faucet, connect at [the live app](https://app-nu-rose-23.vercel.app/), create a profile, Boo a wallet, then open the receipt's Explorer link and confirm the Judgment account and transaction directly on-chain.
 
 ## Reproducibility files
 
-The repository keeps all dependencies inside the project, commits lockfiles, ignores `.keys/`, `target/`, `node_modules/`, and `.env*`, and never includes keypairs or secrets. `docker build -t anti-social-network:local .` builds the frontend from the locked `app/package-lock.json` and the image serves it on port 4173. The Anchor/Solana program build remains a WSL toolchain step because the deployed SBF toolchain is cluster-specific. Public static hosting is still TODO and tracked in `STATUS.md`.
+The repository keeps all dependencies inside the project, commits lockfiles, ignores `.keys/`, `target/`, `node_modules/`, and `.env*`, and never includes keypairs or secrets. `docker build -t anti-social-network:local .` builds the frontend from the locked `app/package-lock.json` and the image serves it on port 4173. The Anchor/Solana program build remains a WSL toolchain step because the deployed SBF toolchain is cluster-specific. Vercel deploys `app/` with `vercel --cwd app --prod --yes`; `app/vercel.json` preserves the SPA routes.
