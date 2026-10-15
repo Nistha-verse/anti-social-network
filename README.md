@@ -151,7 +151,7 @@ These values came from `solana program show D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTN
 
 ## Verify it yourself
 
-The live app is [app-nu-rose-23.vercel.app](https://app-nu-rose-23.vercel.app/). The program and real on-chain references are available now:
+The live app is [app-nu-rose-23.vercel.app](https://app-nu-rose-23.vercel.app/). The current Vercel production deployment is `dpl_7TxLNog71dxFzRKX3LszRiWKBZyw`; the program and real on-chain references are available now:
 
 - Program: [Explorer](https://explorer.solana.com/address/D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTNJSRAKH9m?cluster=devnet)
 - Spite Pool PDA: [`4xWJHhdd5pVzEVhJfy1ZT7Ek81xrGPmomjX3xCeMpzbW`](https://explorer.solana.com/address/4xWJHhdd5pVzEVhJfy1ZT7Ek81xrGPmomjX3xCeMpzbW?cluster=devnet)

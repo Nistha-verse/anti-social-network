@@ -20,6 +20,7 @@ The legacy Solana validator path was attempted and is blocked by the installed A
 - Implemented the Vite + React app, generated frontend IDL copy, RPC data layer, PDA derivation, byte-offset receipt reads, wallet-adapter Wallet Standard setup, devnet genesis guard, polling fallback, event subscriptions, real transaction flows, cost confirmation, error mapping, and profile/Discover/Pool screens.
 - `cd app && npm run build`: passed.
 - The deployed app has been rendered and smoke-checked in headless Chromium against Vercel. Interactive Windows wallet approval is still a manual owner step before claiming create-profile/Boo/Downvote/Retract browser acceptance.
+- Production smoke check: `https://app-nu-rose-23.vercel.app/`, `/pool`, and `/me` each returned HTTP 200; headless Chromium rendered the Discover screen with the wallet selector and Spite Pool.
 
 ## Phase 4 — Character, receipt, jar, and responsive polish: implementation complete, visual gate pending
 
