@@ -30,4 +30,4 @@ The legacy Solana validator path was attempted and is blocked by the installed A
 ## Phase 5 — Documentation and self-review: in progress
 
 - README has actual deployment and measurement values, architecture, account offsets, security properties, limits, demo steps, and real program/judgment links.
-- Live app: `https://app-nu-rose-23.vercel.app/` (Vercel production deployment `dpl_8wEkc9ZgbKfFiVaUX3NWEqk7Wh1Y`). Dockerfile build passed (`docker build -t anti-social-network:local .`) and serves the production frontend on port 4173. GitHub remote is not configured in this workspace; commits are local until an owner-provided remote is added.
+- Live app: `https://app-nu-rose-23.vercel.app/` (Vercel production deployment `dpl_7TxLNog71dxFzRKX3LszRiWKBZyw`). Dockerfile build passed (`docker build -t anti-social-network:local .`) and serves the production frontend on port 4173. GitHub remote `https://github.com/Nistha-verse/anti-social-network.git` is configured and the multi-commit `master` history is pushed.
