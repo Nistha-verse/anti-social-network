@@ -17,6 +17,10 @@ export const SYSTEM_PROGRAM = SystemProgram.programId;
 export const connection = new Connection(RPC_URL, "confirmed");
 export const idl = idlJson as Idl;
 
+function seed(text: string): Uint8Array {
+  return new TextEncoder().encode(text);
+}
+
 export type WalletLike = {
   publicKey: PublicKey;
   signTransaction: (transaction: Transaction) => Promise<Transaction>;
@@ -53,17 +57,17 @@ export type JudgmentRecord = {
 export type ProfileMap = Map<string, ProfileAccount | null>;
 
 export function profilePda(owner: PublicKey): PublicKey {
-  return PublicKey.findProgramAddressSync([Buffer.from("profile"), owner.toBuffer()], PROGRAM_ID)[0];
+  return PublicKey.findProgramAddressSync([seed("profile"), owner.toBytes()], PROGRAM_ID)[0];
 }
 
 export function judgmentPda(actor: PublicKey, id: BN | number | bigint): PublicKey {
-  const bytes = Buffer.alloc(8);
-  bytes.writeBigUInt64LE(BigInt(id.toString()));
-  return PublicKey.findProgramAddressSync([Buffer.from("judgment"), actor.toBuffer(), bytes], PROGRAM_ID)[0];
+  const bytes = new Uint8Array(8);
+  new DataView(bytes.buffer).setBigUint64(0, BigInt(id.toString()), true);
+  return PublicKey.findProgramAddressSync([seed("judgment"), actor.toBytes(), bytes], PROGRAM_ID)[0];
 }
 
 export function spitePoolPda(): PublicKey {
-  return PublicKey.findProgramAddressSync([Buffer.from("spite_pool")], PROGRAM_ID)[0];
+  return PublicKey.findProgramAddressSync([seed("spite_pool")], PROGRAM_ID)[0];
 }
 
 export const SPITE_POOL = spitePoolPda();
@@ -155,7 +159,7 @@ export async function costs(): Promise<{
 }
 
 export async function readRawJudgment(address: PublicKey): Promise<{
-  data: Buffer;
+  data: Uint8Array;
   actor: PublicKey;
   target: PublicKey;
   kind: number;
@@ -164,13 +168,14 @@ export async function readRawJudgment(address: PublicKey): Promise<{
 }> {
   const info = await connection.getAccountInfo(address, "confirmed");
   if (!info) throw new Error("This receipt account is no longer available from the RPC.");
-  const data = Buffer.from(info.data);
+  const data = new Uint8Array(info.data);
+  const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
   return {
     data,
     actor: new PublicKey(data.subarray(16, 48)),
     target: new PublicKey(data.subarray(48, 80)),
     kind: data[80],
-    amount: data.readBigUInt64LE(81),
+    amount: view.getBigUint64(81, true),
     status: data[89],
   };
 }
