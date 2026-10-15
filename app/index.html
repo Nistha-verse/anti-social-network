@@ -7,7 +7,16 @@
     <title>The Anti-Social Network</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><main id="boot-screen" style="max-width:720px;margin:80px auto;padding:24px;font:16px system-ui;color:#322b38"><strong>Opening the Anti-Social Network…</strong></main></div>
+    <script>
+      window.addEventListener('error', function (event) {
+        var root = document.getElementById('root');
+        if (root && event.error) root.innerHTML = '<main style="max-width:720px;margin:80px auto;padding:24px;font:16px system-ui;color:#322b38"><h1>The app hit a browser error.</h1><pre style="white-space:pre-wrap;padding:16px;border-radius:12px;background:#fff1f3;color:#9e4058">' + String(event.error.message || event.message) + '</pre></main>';
+      });
+      window.addEventListener('unhandledrejection', function (event) {
+        console.error('Anti-Social Network promise error', event.reason);
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
