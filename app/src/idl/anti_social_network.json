@@ -1,0 +1,794 @@
+{
+  "address": "D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTNJSRAKH9m",
+  "metadata": {
+    "name": "anti_social_network",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "boo",
+      "discriminator": [
+        229,
+        231,
+        183,
+        40,
+        155,
+        143,
+        66,
+        177
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "actor_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "actor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "judgment",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  106,
+                  117,
+                  100,
+                  103,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "actor"
+              },
+              {
+                "kind": "account",
+                "path": "actor_profile.judgment_count",
+                "account": "Profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "spite_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  112,
+                  105,
+                  116,
+                  101,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "target",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "create_profile",
+      "discriminator": [
+        225,
+        205,
+        234,
+        143,
+        17,
+        186,
+        50,
+        220
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "downvote",
+      "discriminator": [
+        73,
+        64,
+        0,
+        158,
+        133,
+        185,
+        55,
+        7
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "actor_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "actor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "judgment",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  106,
+                  117,
+                  100,
+                  103,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "actor"
+              },
+              {
+                "kind": "account",
+                "path": "actor_profile.judgment_count",
+                "account": "Profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "spite_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  112,
+                  105,
+                  116,
+                  101,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "target",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "retract_judgment",
+      "discriminator": [
+        104,
+        154,
+        224,
+        219,
+        192,
+        0,
+        209,
+        83
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "signer": true,
+          "relations": [
+            "judgment"
+          ]
+        },
+        {
+          "name": "judgment",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  106,
+                  117,
+                  100,
+                  103,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "judgment.actor",
+                "account": "Judgment"
+              },
+              {
+                "kind": "account",
+                "path": "judgment.id",
+                "account": "Judgment"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_profile",
+      "discriminator": [
+        98,
+        67,
+        99,
+        206,
+        86,
+        115,
+        175,
+        1
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "profile"
+          ]
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Judgment",
+      "discriminator": [
+        38,
+        201,
+        85,
+        66,
+        22,
+        129,
+        87,
+        7
+      ]
+    },
+    {
+      "name": "Profile",
+      "discriminator": [
+        184,
+        101,
+        165,
+        188,
+        95,
+        63,
+        127,
+        188
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "Booed",
+      "discriminator": [
+        174,
+        70,
+        210,
+        152,
+        229,
+        92,
+        104,
+        83
+      ]
+    },
+    {
+      "name": "Downvoted",
+      "discriminator": [
+        141,
+        114,
+        218,
+        127,
+        42,
+        232,
+        66,
+        232
+      ]
+    },
+    {
+      "name": "JudgmentRetracted",
+      "discriminator": [
+        227,
+        201,
+        85,
+        51,
+        32,
+        152,
+        97,
+        28
+      ]
+    },
+    {
+      "name": "ProfileCreated",
+      "discriminator": [
+        134,
+        233,
+        199,
+        153,
+        77,
+        206,
+        128,
+        94
+      ]
+    },
+    {
+      "name": "ProfileUpdated",
+      "discriminator": [
+        186,
+        248,
+        62,
+        98,
+        112,
+        98,
+        161,
+        252
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "UsernameEmpty",
+      "msg": "Username cannot be empty"
+    },
+    {
+      "code": 6001,
+      "name": "UsernameTooLong",
+      "msg": "Username must be at most 32 UTF-8 bytes"
+    },
+    {
+      "code": 6002,
+      "name": "MetadataUriTooLong",
+      "msg": "Metadata URI must be at most 100 UTF-8 bytes"
+    },
+    {
+      "code": 6003,
+      "name": "SelfJudgmentNotAllowed",
+      "msg": "You cannot judge yourself"
+    },
+    {
+      "code": 6004,
+      "name": "UnauthorizedRetraction",
+      "msg": "Only the judgment actor can retract this judgment"
+    },
+    {
+      "code": 6005,
+      "name": "JudgmentAlreadyRetracted",
+      "msg": "This judgment has already been retracted"
+    },
+    {
+      "code": 6006,
+      "name": "MathOverflow",
+      "msg": "Numeric value overflowed"
+    }
+  ],
+  "types": [
+    {
+      "name": "Booed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "actor",
+            "type": "pubkey"
+          },
+          {
+            "name": "target",
+            "type": "pubkey"
+          },
+          {
+            "name": "judgment",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Downvoted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "actor",
+            "type": "pubkey"
+          },
+          {
+            "name": "target",
+            "type": "pubkey"
+          },
+          {
+            "name": "judgment",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Judgment",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "actor",
+            "type": "pubkey"
+          },
+          {
+            "name": "target",
+            "type": "pubkey"
+          },
+          {
+            "name": "kind",
+            "type": {
+              "defined": {
+                "name": "JudgmentKind"
+              }
+            }
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "JudgmentStatus"
+              }
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "retracted_at",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "JudgmentKind",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Downvote"
+          },
+          {
+            "name": "Boo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "JudgmentRetracted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "actor",
+            "type": "pubkey"
+          },
+          {
+            "name": "target",
+            "type": "pubkey"
+          },
+          {
+            "name": "judgment",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "JudgmentStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Retracted"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "metadata_uri",
+            "type": "string"
+          },
+          {
+            "name": "judgment_count",
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProfileCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProfileUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "COUNTER_SEED",
+      "type": "bytes",
+      "value": "[99, 111, 117, 110, 116, 101, 114]"
+    },
+    {
+      "name": "HELLO_WORLD_LAMPORTS",
+      "type": "u64",
+      "value": "1"
+    },
+    {
+      "name": "MAX_COUNT",
+      "type": "u64",
+      "value": "10"
+    }
+  ]
+}

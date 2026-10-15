@@ -1,0 +1,11 @@
+.git
+.anchor
+target
+test-ledger
+node_modules
+app/node_modules
+app/dist
+.keys
+.env
+.env.*
+!.env.example

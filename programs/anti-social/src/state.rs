@@ -27,6 +27,7 @@ pub enum JudgmentStatus {
 }
 
 #[account]
+#[derive(InitSpace)]
 pub struct Judgment {
     pub id: u64,
     pub actor: Pubkey,

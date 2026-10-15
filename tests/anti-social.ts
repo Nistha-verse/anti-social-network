@@ -112,6 +112,7 @@ describe("anti-social-network", () => {
     await fund(actor);
     await createProfile(actor);
     expect(await provider.connection.getAccountInfo(spitePool)).to.equal(null);
+    expect(await provider.connection.getMinimumBalanceForRentExemption(0)).to.equal(890_880);
 
     const beforePool = await provider.connection.getBalance(spitePool);
     const signature = await createJudgment("boo", actor, target);

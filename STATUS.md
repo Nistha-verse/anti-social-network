@@ -9,20 +9,24 @@
 
 The legacy Solana validator path was attempted and is blocked by the installed Anchor/Solana toolchain combination; see `DECISIONS.md`. The project test command uses the working default local validator path.
 
-## Phase 2 — Devnet deployment and measurements: pending
+## Phase 2 — Devnet deployment and measurements: complete
 
 - Program ID: `D6a8LBt3wiGQGp1oEXnvUCJNTQoMJmSnFfTNJSRAKH9m` (declared and keypair-synchronized).
-- Devnet deployment: TODO.
-- Compute-unit measurements: TODO.
+- Devnet deployment: complete. `solana program show` reported ProgramData `A8oFxqcH9zN3vGn3kVkXi4wSxRuSuP7fx3KL9SzYzM2p`, last deployed slot `511356237`, data length `173528`, balance `0.88240108 SOL`, and the original authority unchanged.
+- `npm run measure:cu` completed against real devnet with `https://devnet.rpcpool.com` after the Solana Labs endpoint rate-limited. It recorded `create_profile 8966`, `update_profile 4929`, `downvote 22880`, `boo 18380`, and `retract_judgment 4449` compute units in the README with Explorer links.
 
-## Phase 3 — Frontend core flows: pending
+## Phase 3 — Frontend core flows: implementation complete, browser gate pending
 
-Not started.
+- Implemented the Vite + React app, generated frontend IDL copy, RPC data layer, PDA derivation, byte-offset receipt reads, wallet-adapter Wallet Standard setup, devnet genesis guard, polling fallback, event subscriptions, real transaction flows, cost confirmation, error mapping, and profile/Discover/Pool screens.
+- `cd app && npm run build`: passed.
+- Real browser acceptance against devnet is not yet independently checked in this WSL session because no interactive browser wallet approval was available. This remains the phase gate before claiming end-to-end browser completion.
 
-## Phase 4 — Character, receipt, jar, and responsive polish: pending
+## Phase 4 — Character, receipt, jar, and responsive polish: implementation complete, visual gate pending
 
-Not started.
+- Implemented deterministic SVG characters, protocol moods, receipt cards, raw-byte verification panel, retraction stamp, animated bounded jar, exact SOL labels, responsive CSS down to 380px, focus states, and reduced-motion styles.
+- Desktop and 380px visual review is still TODO.
 
-## Phase 5 — Documentation and self-review: pending
+## Phase 5 — Documentation and self-review: in progress
 
-Not started. No frontend URL or real judgment verification link exists yet.
+- README has actual deployment and measurement values, architecture, account offsets, security properties, limits, demo steps, and real program/judgment links.
+- Dockerfile build passed (`docker build -t anti-social-network:local .`) and serves the production frontend on port 4173. Static hosting URL and final self-review remain TODO.
