@@ -3,6 +3,8 @@
 target
 .keys/
 node_modules/
+app/dist/
+*.tsbuildinfo
 *.log
 .env
 .env.*
